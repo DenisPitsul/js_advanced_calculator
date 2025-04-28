@@ -8,29 +8,37 @@ function makeCalculator() {
     result: 0,
 
     operate(operation, value) {
-      this.result = operation(this.result, value);
+      operation.call(this, value);
 
       return this;
     },
 
-    add(a, b) {
-      return a + b;
+    add(value) {
+      this.result += value;
+
+      return this;
     },
 
-    subtract(a, b) {
-      return a - b;
+    subtract(value) {
+      this.result -= value;
+
+      return this;
     },
 
-    multiply(a, b) {
-      return a * b;
+    multiply(value) {
+      this.result *= value;
+
+      return this;
     },
 
-    divide(a, b) {
-      if (b === 0) {
+    divide(value) {
+      if (value === 0) {
         throw new Error(`You can't divide by zero.`);
       }
 
-      return a / b;
+      this.result /= value;
+
+      return this;
     },
 
     reset() {
